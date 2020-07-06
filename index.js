@@ -69,7 +69,6 @@ async function generateReviews(octokit, json) {
 }
 
 async function handleEvent(accessToken, json) {
-  console.log("access token: " + accessToken);
   const octokit = new github.getOctokit(accessToken);
   if (github.context.eventName === 'push') {
     // add annotations
@@ -88,8 +87,12 @@ async function handleEvent(accessToken, json) {
 async function run() {
   try {
     const skipList = core.getInput('skip');
-    const accessToken = core.getInput("access-token");
+    let accessToken = core.getInput("repoToken");
     console.log("access token: " + accessToken);
+    if (!accessToken) {
+      core.setFailed('cannot get accessToken');
+      return;
+    }
     const radar = '/opt/radar/bin/g11n-radar'
     const project =  process.cwd();
     const report = path.resolve(project, 'report.json');
@@ -108,7 +111,7 @@ async function run() {
       core.setFailed('g11n issues exist');
     }
   } catch (error) {
-    core.error(error);
+    core.setFailed(error.message);
   }
 }
 
