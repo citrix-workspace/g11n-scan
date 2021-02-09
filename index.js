@@ -106,7 +106,7 @@ async function run() {
       const artifactClient = artifact.create();
       await artifactClient.uploadArtifact("g11n-result", [report], project);
       console.log('Contact Globalization team in https://citrix.slack.com/archives/CJKDCKS4B for more information');
-      await handleEvent(accessToken, json);
+      // await handleEvent(accessToken, json);
       core.setFailed('g11n issues exist');
     }
   } catch (error) {
