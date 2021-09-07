@@ -10,11 +10,16 @@ This repo hosts the G11n scanner code and actions, and this action is specially 
 * The encoding of the resource files should be correct, otherwise fail the workflow.
 4. **Unmatched placeholders**
 * Unmatched placeholders found in localized resource file when comparing it with corresponding English resource file, placeholders mean the format arguments used to format strings.
+5. **Languages mismatch**
+* Languages declared in metadata.json, but they mismatch the names of localized resource files
+
 ## How to use this action
 ```
   - name: G11n Radar
     uses: citrix-workspace/g11n-scan@master
     with:
-      repoToken: ${{secrets.GITHUB_TOKEN}}
+      repo-access-token: ${{ secrets.GITHUB_TOKEN }}
       skip: 'bundles/coming_soon/,bundles/dip/Citrix/com.sapho.services.zendesk.ZendeskService/'
 ```
+
+if you want to mute the action, just modify `action.yml`, change `main: "dist/index.js"` to `main: no-action.js`
