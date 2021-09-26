@@ -18,7 +18,7 @@ This repo hosts the G11n scanner code and actions, and this action is specially 
   - name: G11n Radar
     uses: citrix-workspace/g11n-scan@master
     with:
-      repo-access-token: ${{ secrets.GITHUB_TOKEN }}
+      repoToken: ${{ secrets.GITHUB_TOKEN }}
       skip: 'bundles/coming_soon/,bundles/dip/Citrix/com.sapho.services.zendesk.ZendeskService/'
 ```
 
