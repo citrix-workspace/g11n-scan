@@ -4,18 +4,12 @@ description: "scan globalization issues in repo"
 
 inputs:
   repoToken:
-    description: "github access token, use secrets.GITHUB_TOKEN"
+    description: "Authentication token, use secrets.GITHUB_TOKEN"
     required: true
   skip:
     description: 'comma separated folders, like: abc/,xyz/,foo/'
-    required: false
-  # slack-channel:
-  #   description: 'slack channel'
-  #   required: true
-  # slack-access-token:
-  #   description: 'slack access token'
-  #   required: true
+    required: true
 
 runs:
-  using: "node12"
-  main: "dist/index.js"
+  using: "docker"
+  image: "Dockerfile"
