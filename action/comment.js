@@ -19,10 +19,12 @@ async function raiseComment(token, comment) {
     
     if (comments.length > 0) {
       const ct = comments.find(c => !!c.user && c.user.login === viewer.login && c.body.startsWith(global.ReportHead))
-      await octokit.rest.issues.deleteComment({
-        ...github.context.repo,
-        comment_id: ct.id,
-      });
+      if (!!ct) {
+        await octokit.rest.issues.deleteComment({
+          ...github.context.repo,
+          comment_id: ct.id,
+        });
+      }
     } 
     
     if (!!comment) {
